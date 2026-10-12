@@ -1,6 +1,16 @@
 import { createGlobalStyle } from "styled-components";
+import { layout, media } from "./media";
 
 export const GlobalStyle = createGlobalStyle`
+  :root {
+    /* 콘텐츠 영역의 실제 높이. 폰에서는 화면 높이, 태블릿·PC에서는 폰 프레임 높이 */
+    --frame-height: var(--app-height, 100dvh);
+
+    ${media.frame} {
+      --frame-height: min(${layout.frameMaxHeight}px, var(--app-height, 100dvh));
+    }
+  }
+
   *,
   *::before,
   *::after {
@@ -11,6 +21,11 @@ export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     min-height: 100%;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {

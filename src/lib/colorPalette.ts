@@ -59,6 +59,7 @@ export const darkColors = {
 
   bg: {
     page: grey[700], // 페이지·도면 바탕
+    backdrop: brand.lime, // 태블릿·PC에서 폰 프레임 양옆 배경
     placeholder: grey[400], // 작품 이미지 자리
     handle: grey[400], // 바텀시트 손잡이
     marker: brand.limeSoft, // 채운 팀 마커
@@ -100,6 +101,7 @@ export const lightColors: ColorsType = {
 
   bg: {
     page: grey[50],
+    backdrop: brand.yellow,
     placeholder: grey[400],
     handle: grey[300],
     marker: grey[800],
