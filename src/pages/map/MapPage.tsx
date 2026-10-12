@@ -1,4 +1,5 @@
-// TODO: 전시장 도면 화면
+import { TabHeader } from "@/components/layout/Header";
+
 export default function MapPage() {
-  return <h1>전시장 도면</h1>;
+  return <TabHeader title="전시장 도면" />;
 }
