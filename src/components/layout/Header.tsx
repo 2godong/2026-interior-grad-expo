@@ -72,6 +72,16 @@ const Bar = styled.header`
   padding: 0 ${layout.gutter}px;
   background: ${({ theme }) => theme.colors.bg.page};
   color: ${({ theme }) => theme.colors.fg.accent};
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: ${layout.gutter}px;
+    right: ${layout.gutter}px;
+    bottom: 0;
+    height: 1px;
+    background: ${({ theme }) => theme.colors.stroke.divider};
+  }
 `;
 
 const Titles = styled.div<{ $align?: "right" }>`
