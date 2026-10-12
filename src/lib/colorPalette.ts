@@ -71,6 +71,7 @@ export const darkColors = {
     panelAction: brand.lime, // 노란 패널 안 버튼(전시 정보)
     panelIcon: grey[800], // 재생 아이콘 박스, 정지 버튼
     scrim: alpha.black33, // 작품 대표 이미지 위 어둡게 덮는 층
+    card: grey.white,
   },
 } as const;
 
@@ -114,5 +115,6 @@ export const lightColors: ColorsType = {
     panelAction: grey[50],
     panelIcon: grey[800],
     scrim: "transparent",
+    card: grey.white,
   },
 };
