@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#49494B" />
     <script>
-      // 접속할 때 다크/라이트 모드를 랜덤으로 정해 <html data-theme>에 표시한다.
-      // React보다 먼저 실행해 첫 화면 배경이 깜빡이지 않게 한다. (src/styles/themeMode.ts가 이 값을 읽음)
-      // - ?theme=dark | ?theme=light 로 강제 지정
-      // - 같은 탭에서는 새로고침·페이지 이동해도 유지 (sessionStorage)
-      // 배경색은 src/lib/colorPalette.ts의 bg.page와 맞출 것
+      // React보다 먼저 모드를 정해야 첫 화면 배경이 깜빡이지 않음
+      // ?theme=dark | ?theme=light 로 강제 지정
+      // 배경색은 colorPalette.ts의 bg.page와 맞출 것
       (function () {
         var KEY = "exhibition-theme";
         var BG = { dark: "#49494B", light: "#F7F7F7" };
