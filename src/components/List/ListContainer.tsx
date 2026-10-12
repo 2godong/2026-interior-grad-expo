@@ -1,4 +1,5 @@
 // import type { ReactNode } from "react";
+import { Link } from "react-router";
 import * as S from "./ListContainer.styles";
 
 export interface ListContainerProps {
@@ -17,7 +18,7 @@ export default function ListContainer({
   duration,
 }: ListContainerProps) {
   return (
-    <S.ListContainer>
+    <S.ListContainer as={Link} to={`/docent/${teamId}/${zone}`}>
       <S.NumberContainer>
         <S.NumBox $zone={zone}>
           <S.Num $zone={zone}>{teamId.padStart(2, "0")}</S.Num>

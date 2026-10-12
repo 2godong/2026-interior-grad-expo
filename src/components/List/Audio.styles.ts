@@ -3,9 +3,14 @@ import { themes } from "../../styles/theme";
 
 const { colors, fonts } = themes.light;
 
+const BAR_HEIGHT = 96;
+const BAR_BOTTOM = 19;
+// 오디오바가 떠 있을 때 리스트 아래에 둘 여백 (바 높이 + 바닥 간격 + 바 위 간격)
+export const AUDIO_BAR_SPACE = BAR_HEIGHT + BAR_BOTTOM * 2;
+
 export const AudioContainer = styled.div`
   position: fixed;
-  bottom: 19px;
+  bottom: ${BAR_BOTTOM}px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 38px);
@@ -13,7 +18,7 @@ export const AudioContainer = styled.div`
   z-index: 10;
 
   box-sizing: border-box;
-  height: 96px;
+  height: ${BAR_HEIGHT}px;
   padding: 18px 19px;
   display: flex;
   align-items: center;

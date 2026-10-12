@@ -10,6 +10,8 @@ export const ListContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
   &:nth-child(odd) {
     border-bottom: 1px solid ${themes.light.colors.bg.placeholder};
   }
@@ -63,6 +65,7 @@ export const TitleBox = styled.div`
 export const Title = styled.div`
   font-size: 18px;
   font-weight: 500;
+  word-break: keep-all; /* 한글 단어 중간에서 끊지 않음 */
 `;
 export const TeamName = styled.div`
   ${themes.light.fonts.body}
@@ -72,6 +75,8 @@ export const ZoneContainer = styled.div`
   flex-direction: column;
   gap: 14px;
   align-items: end;
+  flex-shrink: 0;
+  white-space: nowrap; /* "media zone"이 두 줄로 밀리지 않게 */
 `;
 export const Zone = styled.div`
   ${themes.light.fonts.body}
