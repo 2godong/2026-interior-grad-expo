@@ -1,6 +1,31 @@
 import type { ListContainerProps } from "../components/List/ListContainer";
 
-export const projects: ListContainerProps[] = [
+export type DocentBlock =
+  | { type: "text"; value: string }
+  | { type: "image"; src: string };
+
+export interface Project extends ListContainerProps {
+  audio?: string;
+  thumbnail?: string;
+  content?: DocentBlock[];
+}
+
+export const zoneLabel = { model: "모형존", media: "미디어존" } as const;
+
+export function getWork(teamId?: string, zone?: string) {
+  return projects.find((p) => p.teamId === teamId && p.zone === zone);
+}
+
+export function getPrevNext(work: Project) {
+  const list = projects.filter((p) => p.zone === work.zone);
+  const i = list.findIndex((p) => p.teamId === work.teamId);
+  return {
+    prev: list[(i - 1 + list.length) % list.length],
+    next: list[(i + 1) % list.length],
+  };
+}
+
+export const projects: Project[] = [
   {
     teamId: "1",
     zone: "model",
