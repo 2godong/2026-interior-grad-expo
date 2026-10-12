@@ -1,26 +1,23 @@
 import { css } from "styled-components";
 
-// 화면 폭 기준값(px)
 export const breakpoints = {
   compact: 360, // 이보다 좁으면 작은 폰 (iPhone SE 1세대 320, 갤럭시 폴드 접은 화면)
-  frame: 768, // 이 이상(태블릿·PC)이면 화면 가운데에 폰 프레임으로 보여줌
+  frame: 768, // 이상이면 폰 프레임 모드
 } as const;
 
-// styled-components 안에서 `${media.compact} { ... }` 형태로 사용
 export const media = {
   compact: `@media (max-width: ${breakpoints.compact - 0.02}px)`,
   frame: `@media (min-width: ${breakpoints.frame}px)`,
 } as const;
 
 export const layout = {
-  frameWidth: 393, // 폰 프레임 폭 (Figma 프레임 기준)
-  frameMaxHeight: 852, // 폰 프레임 최대 높이
-  frameHeight: "var(--frame-height)", // 실제로 보이는 콘텐츠 영역 높이. 100dvh 대신 사용
-  gutter: 20, // 모든 페이지의 좌우 여백 (Figma 기준)
+  frameWidth: 393,
+  frameMaxHeight: 852,
+  frameHeight: "var(--frame-height)", // 100dvh 대신 사용
+  gutter: 20,
 } as const;
 
-// 좌우 여백 20px. 노치가 있는 기기의 가로 모드에서는 safe-area만큼 더 띄움
-// 페이지에는 AppLayout이 이미 적용하므로, 프레임에 고정되는 요소(하단 재생 바 등)나 포털에만 사용
+// 페이지에는 AppLayout이 이미 적용함. fixed 요소나 포털에만 사용
 export const gutterX = css`
   padding-left: max(${layout.gutter}px, env(safe-area-inset-left));
   padding-right: max(${layout.gutter}px, env(safe-area-inset-right));

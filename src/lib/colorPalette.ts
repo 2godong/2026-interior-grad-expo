@@ -11,12 +11,12 @@ export const palette = {
 
   grey: {
     0: "#F8F9FF",
-    50: "#F7F7F7", // 라이트 모드 페이지 바탕
+    50: "#F7F7F7",
     100: "#E7ECEF",
     300: "#C5C7CC",
     400: "#B3B5B8",
-    700: "#49494B", // 다크 모드 페이지 바탕
-    800: "#262624", // 잉크 — 글자, 도면 선, 탭·아이콘 박스
+    700: "#49494B",
+    800: "#262624",
     900: "#000000",
     white: "#FFFFFF",
   },
@@ -27,7 +27,7 @@ export const palette = {
   },
 
   alpha: {
-    black33: "rgba(0, 0, 0, 0.33)", // 화면 가림(scrim)
+    black33: "rgba(0, 0, 0, 0.33)",
   },
 } as const;
 
@@ -45,6 +45,7 @@ export const darkColors = {
     onTab: grey[800], // 활성 탭(도면/리스트) 글자
     onPanel: grey[800], // 노란 패널(하단 재생 바, 오디오 플레이어) 위 글자
     onPanelIcon: brand.yellow, // 재생 아이콘 박스·정지 버튼 안 아이콘
+    poster: brand.lime, // 온보딩 포스터 위 글자 (하단 전시 기간·장소·주최)
   },
 
   stroke: {
@@ -87,6 +88,7 @@ export const lightColors: ColorsType = {
     onTab: brand.yellow,
     onPanel: grey[800],
     onPanelIcon: brand.yellow,
+    poster: brand.yellow,
   },
 
   stroke: {
