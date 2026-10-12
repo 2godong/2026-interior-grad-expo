@@ -39,7 +39,6 @@ export default function OnboardingPage() {
   return (
     <Page>
       <BlurredPic src={pic} alt="" aria-hidden />
-      {/* 화면이 짧으면 포스터가 남는 높이에 맞춰 줄어들어 아래 테이프와 겹치지 않음 */}
       <PosterArea>
         <Poster
           src={poster}
@@ -50,7 +49,6 @@ export default function OnboardingPage() {
       <TapeSlot>
         <EnterTape mode={mode} peeling={peeling} />
       </TapeSlot>
-      {/* 화면이 길면 남는 높이는 테이프와 하단 정보 사이로 감 */}
       <Footer>
         <PosterInfo mode={mode} />
       </Footer>
@@ -81,7 +79,7 @@ const BlurredPic = styled.img`
   object-fit: cover;
   object-position: center bottom;
   filter: blur(32px);
-  transform: scale(1.15); /* 블러 가장자리가 비치지 않게 살짝 키움 */
+  transform: scale(1.15);
 `;
 
 const PosterArea = styled.div`
@@ -99,7 +97,6 @@ const Poster = styled.img`
   mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
 `;
 
-// 테이프 위쪽 여백이 포스터의 흐려지는 끝부분에 겹치도록 끌어올림
 const TapeSlot = styled.div`
   position: relative;
   flex-shrink: 0;
