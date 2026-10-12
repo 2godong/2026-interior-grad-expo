@@ -1,13 +1,26 @@
 import styled from "styled-components";
 import { themes } from "../../styles/theme";
 
+type Zone = "model" | "media";
+const colors = themes.light.colors;
+
 export const ListContainer = styled.div`
   padding: 23px 20px;
-  border-top: 1px solid ${themes.light.colors.stroke.divider};
-  border-bottom: 1px solid ${themes.light.colors.stroke.divider};
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+  &:nth-child(odd) {
+    border-bottom: 1px solid ${themes.light.colors.bg.placeholder};
+  }
+
+  &:nth-child(even) {
+    border-bottom: 1px solid ${themes.light.colors.stroke.divider};
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 export const NumberContainer = styled.div`
@@ -18,17 +31,28 @@ export const NumberContainer = styled.div`
   align-items: flex-start;
 `;
 
-export const NumBox = styled.div`
-  width: 30px;
-  height: 30px;
-  background-color: ${themes.light.colors.fg.onMarkerActive};
-  justify-content: center;
-  align-items: center;
+export const NumBox = styled.div<{ $zone: Zone }>`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  background: ${({ $zone }) =>
+    $zone === "model" ? colors.bg.marker : "transparent"};
+  border: 1px solid
+    ${({ $zone }) =>
+      $zone === "model" ? colors.bg.marker : colors.stroke.marker};
 `;
 
-export const Num = styled.div`
-  color: ${({ theme }) => theme.colors.bg.card};
+export const Num = styled.span<{ $zone: Zone }>`
+  font-size: 14px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: ${({ $zone }) =>
+    $zone === "model" ? colors.bg.card : colors.fg.primary};
 `;
 
 export const TitleBox = styled.div`

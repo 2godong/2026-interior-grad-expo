@@ -1,27 +1,36 @@
 // import type { ReactNode } from "react";
 import * as S from "./ListContainer.styles";
 
-// interface ListContainerProps {
-//   title?: string;
-//   children: ReactNode;
-// }
+export interface ListContainerProps {
+  teamId: string;
+  title: string;
+  members: string[];
+  zone: "model" | "media";
+  duration: string;
+}
 
-export default function ListContainer() {
+export default function ListContainer({
+  teamId,
+  title,
+  members,
+  zone,
+  duration,
+}: ListContainerProps) {
   return (
     <S.ListContainer>
       <S.NumberContainer>
-        <S.NumBox>
-          <S.Num>01</S.Num>
+        <S.NumBox $zone={zone}>
+          <S.Num $zone={zone}>{teamId.padStart(2, "0")}</S.Num>
         </S.NumBox>
         <S.TitleBox>
-          <S.Title>작품명</S.Title>
-          <S.TeamName>팀원 명</S.TeamName>
+          <S.Title>{title}</S.Title>
+          <S.TeamName>{members.join(", ")}</S.TeamName>
         </S.TitleBox>
       </S.NumberContainer>
 
       <S.ZoneContainer>
-        <S.Zone>model zone</S.Zone>
-        <S.Time>3:42</S.Time>
+        <S.Zone>{zone} zone</S.Zone>
+        <S.Time>{duration}</S.Time>
       </S.ZoneContainer>
     </S.ListContainer>
   );
