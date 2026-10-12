@@ -63,7 +63,7 @@ export const fonts = {
   caption: css`
     font-size: 12px;
     line-height: 18px;
-    font-weight: 400;
+    font-weight: 300;
   `, // 팀 번호·주소·운영시간·재생 시간·캡션
   numeral: css`
     font-size: 12px;
