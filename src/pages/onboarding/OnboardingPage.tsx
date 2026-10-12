@@ -82,21 +82,23 @@ const BlurredPic = styled.img`
   transform: scale(1.15);
 `;
 
+// 화면이 짧으면 포스터를 줄이지 않고 아래쪽부터 잘라냄 (잘린 끝도 흐려지며 이어짐)
 const PosterArea = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
   flex: 0 1 auto;
   min-height: 0;
+  aspect-ratio: 3 / 4;
 `;
 
 const Poster = styled.img`
   display: block;
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
   mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
 `;
 
+// 테이프 위쪽 빈 공간이 포스터의 흐려지는 끝부분에 겹치도록 끌어올림
 const TapeSlot = styled.div`
   position: relative;
   flex-shrink: 0;

@@ -18,7 +18,7 @@ type Props = {
 };
 
 export default function EnterTape({ mode, peeling }: Props) {
-  const { width, height, offsetX, offsetBottom, tapes, label } = tapeSets[mode];
+  const { width, height, offsetX, offsetBottom, shiftY, tapes, label } = tapeSets[mode];
 
   const stuckRefs = useRef<(HTMLDivElement | null)[]>([]);
   const flapRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -99,6 +99,7 @@ export default function EnterTape({ mode, peeling }: Props) {
       style={{
         width,
         height,
+        top: shiftY,
         marginBottom: offsetBottom,
         marginLeft: `calc(50% - ${width / 2 - offsetX}px)`,
       }}

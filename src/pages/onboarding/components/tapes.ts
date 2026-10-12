@@ -16,6 +16,7 @@ type TapeSet = {
   height: number;
   offsetX: number;
   offsetBottom: number;
+  shiftY: number; // 레이아웃(포스터 크기)에 영향 없이 보이는 위치만 아래로 내림
   tapes: [Tape, Tape];
   label: { x: number; y: number; angle: number };
 };
@@ -32,6 +33,7 @@ export const tapeSets: Record<ThemeMode, TapeSet> = {
     height: 157,
     offsetX: 10,
     offsetBottom: 22,
+    shiftY: 12,
     tapes: [
       {
         d: "M249.825 79.6674L237.544 119.79L4.26448 60.7988L17.6866 19.4284L249.825 79.6674Z",
@@ -57,6 +59,7 @@ export const tapeSets: Record<ThemeMode, TapeSet> = {
     height: 199,
     offsetX: 4,
     offsetBottom: 2,
+    shiftY: 0,
     tapes: [
       {
         d: "M8.49042 116.331L17.8069 157.244L254.773 115.453L244.41 73.2129L8.49042 116.331Z",
