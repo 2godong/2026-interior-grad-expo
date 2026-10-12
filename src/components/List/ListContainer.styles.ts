@@ -15,7 +15,7 @@ export const ListContainer = styled.div`
   }
 
   &:nth-child(even) {
-    border-bottom: 1px solid ${themes.light.colors.stroke.divider};
+    border-bottom: 1.2px solid ${themes.light.colors.stroke.divider};
   }
 
   &:last-child {
@@ -48,11 +48,11 @@ export const NumBox = styled.div<{ $zone: Zone }>`
 `;
 
 export const Num = styled.span<{ $zone: Zone }>`
-  font-size: 14px;
   line-height: 1;
   font-variant-numeric: tabular-nums;
   color: ${({ $zone }) =>
     $zone === "model" ? colors.bg.card : colors.fg.primary};
+  ${themes.light.fonts.body}
 `;
 
 export const TitleBox = styled.div`
@@ -60,13 +60,22 @@ export const TitleBox = styled.div`
   display: flex;
   flex-direction: column;
 `;
-export const Title = styled.div``;
-export const TeamName = styled.div``;
+export const Title = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+`;
+export const TeamName = styled.div`
+  ${themes.light.fonts.body}
+`;
 export const ZoneContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
   align-items: end;
 `;
-export const Zone = styled.div``;
-export const Time = styled.div``;
+export const Zone = styled.div`
+  ${themes.light.fonts.body}
+`;
+export const Time = styled.div`
+  ${themes.light.fonts.body}
+`;
