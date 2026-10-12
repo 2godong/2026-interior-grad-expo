@@ -1,3 +1,5 @@
+import { TabHeader } from "@/components/layout/Header";
+
 export default function ListPage() {
-  return <h1>프로젝트 리스트</h1>;
+  return <TabHeader title="프로젝트 리스트" />;
 }
