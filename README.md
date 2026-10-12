@@ -1,7 +1,6 @@
-# 🌐 2026 Interior Graduation Expo
+# 🌐 2026 Interior Graduation Expo x LikeLionDS 14th
 
 ## 🖥️ FE Developer
-**덕성여자대학교 멋쟁이사자처럼 14기 프론트엔드 운영진**
 
 | <a href="https://github.com/yangyangeeee"><img width="150" alt="/" src="https://avatars.githubusercontent.com/yangyangeeee" /></a> | <a href="https://github.com/2godong"><img src="https://avatars.githubusercontent.com/2godong" width="150" alt="/"/></a> |
 | --- | --- |
