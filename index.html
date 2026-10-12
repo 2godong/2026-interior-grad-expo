@@ -4,6 +4,33 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#49494B" />
+    <script>
+      // 접속할 때 다크/라이트 모드를 랜덤으로 정해 <html data-theme>에 표시한다.
+      // React보다 먼저 실행해 첫 화면 배경이 깜빡이지 않게 한다. (src/styles/themeMode.ts가 이 값을 읽음)
+      // - ?theme=dark | ?theme=light 로 강제 지정
+      // - 같은 탭에서는 새로고침·페이지 이동해도 유지 (sessionStorage)
+      // 배경색은 src/lib/colorPalette.ts의 bg.page와 맞출 것
+      (function () {
+        var KEY = "exhibition-theme";
+        var BG = { dark: "#49494B", light: "#F7F7F7" };
+        var isMode = function (m) { return m === "dark" || m === "light"; };
+
+        var mode = new URLSearchParams(location.search).get("theme");
+        if (!isMode(mode)) {
+          try { mode = sessionStorage.getItem(KEY); } catch (e) {}
+        }
+        if (!isMode(mode)) mode = Math.random() < 0.5 ? "dark" : "light";
+        // 인앱 브라우저·개인정보 보호 모드에서는 storage 접근이 막힐 수 있음
+        try { sessionStorage.setItem(KEY, mode); } catch (e) {}
+
+        var root = document.documentElement;
+        root.dataset.theme = mode;
+        root.style.colorScheme = mode;
+        root.style.background = BG[mode];
+        document.querySelector('meta[name="theme-color"]').setAttribute("content", BG[mode]);
+      })();
+    </script>
     <title>my-app</title>
   </head>
   <body>

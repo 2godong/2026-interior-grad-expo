@@ -1,7 +1,7 @@
 // 컬러팔레트
 
-export const colors = {
-  // Primitive
+// Primitive — 모드와 무관한 원색. 컴포넌트에서 직접 쓰지 말고 아래 시맨틱 토큰을 통해 사용
+export const palette = {
   brand: {
     yellow: "#EFEDA8",
     lime: "#D4DC7D",
@@ -11,42 +11,104 @@ export const colors = {
 
   grey: {
     0: "#F8F9FF",
+    50: "#F7F7F7", // 라이트 모드 페이지 바탕
     100: "#E7ECEF",
     300: "#C5C7CC",
     400: "#B3B5B8",
-    700: "#49494B",
+    700: "#49494B", // 다크 모드 페이지 바탕
+    800: "#262624", // 잉크 — 글자, 도면 선, 탭·아이콘 박스
     900: "#000000",
     white: "#FFFFFF",
   },
 
-  // Semantic
-  fg: {
-    primary: "#000000", // 제목과 본문 (ink)
-    muted: "#49494B", // 보조 정보 - 팀 번호, 주소, 운영시간, 안내 문구 (ink-muted)
-    faint: "#B3B5B8", // 비활성 표시, 장식선. 읽어야 하는 글자에는 X (ink-faint)
-    onAccent: "#000000", // accent, accentSoft 위의 글자와 아이콘 (on-accent)
-    inverse: "#EFEDA8", // inverse 바탕 위의 글자·아이콘 (on-inverse)
-    inverseMuted: "#C5C7CC", // inverse 바탕 위의 보조 글자 (on-inverse-muted)
+  blue: {
+    100: "#DBE9FF",
+    200: "#D4E4FA",
   },
 
-  stroke: {
-    subtle: "#C5C7CC", // 카드 테두리와 구분선, 장식용 구분에만 (line)
-    strong: "#49494B", // 버튼·토글·마커 등 컨트롤의 1px 테두리 (line-strong)
-    inverse: "#EFEDA8", // inverse 바탕 위의 선 (on-inverse)
-  },
-
-  bg: {
-    neutral: "#F8F9FF", // 페이지 바탕 (surface)
-    raised: "#FFFFFF", // 카드, 다이얼로그, 헤더, 버튼 바탕 (surface-raised)
-    sunken: "#E7ECEF", // 이미지 자리, 썸네일 자리, 도면 바탕 (surface-sunken)
-    accent: "#D4DC7D", // 재생 중 마커, 재생 진행, 활성 상태의 면 (accent)
-    accentSoft: "#E3EAA2", // 현재 재생 중 카드의 바탕 (accent-soft)
-    highlight: "#EFEDA8", // 테이프 그래픽의 면, 강조 글자 뒤 바탕 (highlight)
-    highlightSoft: "#F9FAD4", // 안내 문구의 옅은 바탕 (highlight-soft)
-    inverse: "#000000", // 스플래시 바탕, 주요 버튼의 면 (inverse-surface)
-    inverseRaised: "#49494B", // 주요 버튼의 눌림 상태 (inverse-surface-raised)
-    scrim: "rgba(0, 0, 0, 0.33)", // 다이얼로그 뒤 화면 가림 (scrim)
+  alpha: {
+    black33: "rgba(0, 0, 0, 0.33)", // 화면 가림(scrim)
   },
 } as const;
 
-export type ColorsType = typeof colors;
+const { brand, grey, alpha } = palette;
+
+// Semantic — 다크(포스터) 버전이 기준, 라이트 버전은 같은 키에 값만 바뀜
+export const darkColors = {
+  fg: {
+    primary: grey[50], // 본문 — 작품명, 작품 설명, 표 내용, 가이드 문구
+    accent: brand.limeSoft, // 화면 제목·영문 부제, 뒤로가기, 탭, 안내 문구, 하단 링크, 푸터
+    muted: brand.yellow, // MEDIA ZONE 등 존 라벨
+    active: brand.limeSoft, // 리스트에서 재생 중인 행의 작품명·정보
+    onMarker: grey[800], // 채운 팀 마커 안의 번호
+    onMarkerActive: brand.limeSoft, // 재생 중 팀 마커 안의 번호
+    onTab: grey[800], // 활성 탭(도면/리스트) 글자
+    onPanel: grey[800], // 노란 패널(하단 재생 바, 오디오 플레이어) 위 글자
+    onPanelIcon: brand.yellow, // 재생 아이콘 박스·정지 버튼 안 아이콘
+  },
+
+  stroke: {
+    divider: brand.limeSoft, // 헤더 아래 선, 표·행 구분선(리스트 행 사이 옅은 선 포함), 이전/다음 구분선
+    plan: brand.yellow, // 도면 벽선, 입구 화살표, 영문 타이포
+    control: brand.yellow, // 줌(-, +, 전체화면) 버튼 테두리
+    marker: grey[50], // 테두리만 있는 팀 마커
+    markerActive: brand.limeSoft, // 재생 중 팀 마커 테두리
+    indicator: brand.limeSoft, // 재생 중 사각형 테두리
+    panel: grey[800], // 노란 패널과 그 안 버튼 테두리
+  },
+
+  bg: {
+    page: grey[700], // 페이지·도면 바탕
+    placeholder: grey[400], // 작품 이미지 자리
+    handle: grey[400], // 바텀시트 손잡이
+    marker: brand.limeSoft, // 채운 팀 마커
+    markerActive: "transparent", // 재생 중 팀 마커
+    tab: brand.limeSoft, // 활성 탭(도면/리스트)
+    indicator: grey[800], // 재생 중 옆 사각형
+    panel: brand.yellow, // 하단 재생 바, 전시 정보 칸, 오디오 플레이어
+    panelAction: brand.lime, // 노란 패널 안 버튼(전시 정보)
+    panelIcon: grey[800], // 재생 아이콘 박스, 정지 버튼
+    scrim: alpha.black33, // 작품 대표 이미지 위 어둡게 덮는 층
+  },
+} as const;
+
+type ColorTokens<T> = { [K in keyof T]: { [P in keyof T[K]]: string } };
+export type ColorsType = ColorTokens<typeof darkColors>;
+
+export const lightColors: ColorsType = {
+  fg: {
+    primary: grey[800],
+    accent: grey[800],
+    muted: grey[700],
+    active: brand.lime,
+    onMarker: brand.yellow,
+    onMarkerActive: grey[800],
+    onTab: brand.yellow,
+    onPanel: grey[800],
+    onPanelIcon: brand.yellow,
+  },
+
+  stroke: {
+    divider: grey[800],
+    plan: grey[800],
+    control: grey[800],
+    marker: grey[800],
+    markerActive: grey[800],
+    indicator: grey[800],
+    panel: grey[800],
+  },
+
+  bg: {
+    page: grey[50],
+    placeholder: grey[400],
+    handle: grey[300],
+    marker: grey[800],
+    markerActive: brand.yellow,
+    tab: grey[800],
+    indicator: brand.yellow,
+    panel: brand.yellow,
+    panelAction: grey[50],
+    panelIcon: grey[800],
+    scrim: "transparent",
+  },
+};

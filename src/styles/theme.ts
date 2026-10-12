@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { colors } from "../lib/colorPalette";
+import { darkColors, lightColors, type ColorsType } from "../lib/colorPalette";
 
 const family = {
   base: '"A2Z", -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif',
@@ -73,9 +73,12 @@ export const fonts = {
   `, // 두 자리 팀 마커. 0을 생략하지 않고 숫자 폭을 고정
 } as const;
 
-export const theme = {
-  colors,
-  fonts,
-} as const;
+export type ThemeType = {
+  colors: ColorsType;
+  fonts: typeof fonts;
+};
 
-export type ThemeType = typeof theme;
+export const darkTheme: ThemeType = { colors: darkColors, fonts };
+export const lightTheme: ThemeType = { colors: lightColors, fonts };
+
+export const themes = { dark: darkTheme, light: lightTheme } as const;
