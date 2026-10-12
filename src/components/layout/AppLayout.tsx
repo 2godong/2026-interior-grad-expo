@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Outlet, useLocation } from "react-router";
 import styled from "styled-components";
-import { layout, media } from "@/styles/media";
+import { gutterX, layout, media } from "@/styles/media";
 import { useAppHeight } from "./useAppHeight";
 
 // 모든 페이지를 감싸는 모바일 레이아웃.
@@ -56,6 +56,7 @@ const Frame = styled.div`
 `;
 
 const Scroll = styled.div`
+  ${gutterX} /* 모든 페이지 공통 좌우 여백 */
   height: 100%;
   overflow-y: auto;
   overscroll-behavior: contain;

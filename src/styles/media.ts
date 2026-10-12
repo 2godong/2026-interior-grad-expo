@@ -16,19 +16,14 @@ export const layout = {
   frameWidth: 393, // 폰 프레임 폭 (Figma 프레임 기준)
   frameMaxHeight: 852, // 폰 프레임 최대 높이
   frameHeight: "var(--frame-height)", // 실제로 보이는 콘텐츠 영역 높이. 100dvh 대신 사용
-  gutter: 20, // 좌우 여백 (Figma 기준)
-  gutterCompact: 16, // 작은 폰의 좌우 여백
+  gutter: 20, // 모든 페이지의 좌우 여백 (Figma 기준)
 } as const;
 
-// 페이지 콘텐츠의 좌우 여백. 노치가 있는 기기의 가로 모드에서는 safe-area만큼 더 띄움
+// 좌우 여백 20px. 노치가 있는 기기의 가로 모드에서는 safe-area만큼 더 띄움
+// 페이지에는 AppLayout이 이미 적용하므로, 프레임에 고정되는 요소(하단 재생 바 등)나 포털에만 사용
 export const gutterX = css`
   padding-left: max(${layout.gutter}px, env(safe-area-inset-left));
   padding-right: max(${layout.gutter}px, env(safe-area-inset-right));
-
-  ${media.compact} {
-    padding-left: max(${layout.gutterCompact}px, env(safe-area-inset-left));
-    padding-right: max(${layout.gutterCompact}px, env(safe-area-inset-right));
-  }
 `;
 
 // createPortal로 body에 바로 붙는 요소(모달, 토스트 등)는 프레임 밖에서 렌더링되므로
