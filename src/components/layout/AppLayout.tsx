@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef } from "react";
+import { Outlet, useLocation } from "react-router";
 import styled from "styled-components";
 import { layout, media } from "@/styles/media";
 import { useAppHeight } from "./useAppHeight";
@@ -7,13 +8,22 @@ import { useAppHeight } from "./useAppHeight";
 // - 768px 미만(폰): 화면을 꽉 채움
 // - 768px 이상(태블릿·PC): 393px 폭, 최대 852px 높이의 폰 프레임을 화면 가운데에 띄움
 // 스크롤은 브라우저가 아니라 프레임 안(Scroll)에서 일어난다.
-export default function AppLayout({ children }: { children: ReactNode }) {
+export default function AppLayout() {
   useAppHeight();
+
+  // 스크롤이 브라우저가 아니라 Scroll 안에서 일어나므로, 페이지가 바뀌면 직접 맨 위로 올린다
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
+  useEffect(() => {
+    scrollRef.current?.scrollTo(0, 0);
+  }, [pathname]);
 
   return (
     <Backdrop>
       <Frame>
-        <Scroll>{children}</Scroll>
+        <Scroll ref={scrollRef}>
+          <Outlet />
+        </Scroll>
       </Frame>
     </Backdrop>
   );
