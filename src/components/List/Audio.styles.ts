@@ -6,7 +6,6 @@ const { colors, fonts } = themes[getThemeMode()];
 
 const BAR_HEIGHT = 96;
 const BAR_BOTTOM = 19;
-// 오디오바가 떠 있을 때 리스트 아래에 둘 여백 (바 높이 + 바닥 간격 + 바 위 간격)
 export const AUDIO_BAR_SPACE = BAR_HEIGHT + BAR_BOTTOM * 2;
 
 export const AudioContainer = styled.div`
