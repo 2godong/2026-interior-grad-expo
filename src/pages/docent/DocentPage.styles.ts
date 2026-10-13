@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Link } from "react-router";
 import { themes } from "../../styles/theme";
+import { getThemeMode } from "../../styles/themeMode";
 
-const { colors, fonts } = themes.light;
+const { colors, fonts } = themes[getThemeMode()];
 
 export const HEADER_HEIGHT = 80;
 const HERO_HEIGHT = 220;
@@ -45,7 +46,7 @@ export const Badge = styled.span`
   height: 28px;
   flex-shrink: 0;
   background: ${colors.bg.marker};
-  color: ${colors.bg.card};
+  color: ${colors.fg.onMarker};
 `;
 
 export const HeroBadge = styled(Badge)<{ $hidden: boolean }>`
