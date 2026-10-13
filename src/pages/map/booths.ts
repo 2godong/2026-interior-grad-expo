@@ -1,8 +1,7 @@
 import type { TeamId } from "@/data/teams";
 
-// 좌표는 Figma 393px 프레임 기준. 도면 영역은 프레임 y 116px부터 시작하므로 그만큼 뺀 값
 export const PLAN_WIDTH = 393;
-export const PLAN_HEIGHT = 816; // ENTRANCE 아래 여백 포함
+export const PLAN_HEIGHT = 816;
 export const BOOTH_SIZE = 27;
 
 const TOP = 116;
@@ -15,7 +14,6 @@ export type Booth = {
   y: number;
 };
 
-// 팀마다 미디어 존과 모델 존에 부스가 하나씩 있음
 const raw: [TeamId, Booth["zone"], number, number][] = [
   ["08", "media", 144.4, 144.4],
   ["09", "media", 184.5, 144.4],
@@ -49,15 +47,36 @@ export const booths: Booth[] = raw.map(([team, zone, x, y]) => ({
   y: y - TOP,
 }));
 
-// 벽선 (각 항목은 이어지는 점들)
 export const walls: [number, number][][] = [
-  [[67.4, 131.9], [324.9, 131.9]],
-  [[50.9, 160.4], [50.9, 732.3]],
-  [[339.3, 162], [339.3, 861.4]],
-  [[275.9, 674.5], [340.5, 674.5]],
-  [[67.4, 757.9], [248.6, 757.9]],
-  [[186.5, 757.9], [186.5, 860.6], [251, 860.6]],
-  [[317.6, 860.6], [340.5, 860.6]],
+  [
+    [67.4, 131.9],
+    [324.9, 131.9],
+  ],
+  [
+    [50.9, 160.4],
+    [50.9, 732.3],
+  ],
+  [
+    [339.3, 162],
+    [339.3, 861.4],
+  ],
+  [
+    [275.9, 674.5],
+    [340.5, 674.5],
+  ],
+  [
+    [67.4, 757.9],
+    [248.6, 757.9],
+  ],
+  [
+    [186.5, 757.9],
+    [186.5, 860.6],
+    [251, 860.6],
+  ],
+  [
+    [317.6, 860.6],
+    [340.5, 860.6],
+  ],
 ].map((line) => line.map(([x, y]) => [x, y - TOP] as [number, number]));
 
 export const planY = (y: number) => y - TOP;

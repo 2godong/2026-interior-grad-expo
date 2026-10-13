@@ -53,7 +53,8 @@ export const ContentWr = styled.div`
 `;
 
 export const ContentTitle = styled.div`
-  ${fonts.body}
+  ${fonts.caption}
+  font-weight: 400;
   display: flex;
   align-items: center;
   gap: 6px;
