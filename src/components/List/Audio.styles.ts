@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { themes } from "../../styles/theme";
+import { getThemeMode } from "../../styles/themeMode";
 
-const { colors, fonts } = themes.light;
+const { colors, fonts } = themes[getThemeMode()];
 
 const BAR_HEIGHT = 96;
 const BAR_BOTTOM = 19;

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { themes } from "../../styles/theme";
+import { getThemeMode } from "../../styles/themeMode";
 
-const { colors, fonts } = themes.light;
+const { colors, fonts } = themes[getThemeMode()];
 
 export const Player = styled.div`
   padding: 12px 14px 14px;
