@@ -2,19 +2,11 @@ import { useRef, useState, type ChangeEvent } from "react";
 import * as S from "./AudioPlayer.styles";
 import playIcon from "@/assets/playIcon.svg";
 import stopIcon from "@/assets/stopIcon.svg";
+import { formatTime } from "@/utils/formatTime";
 
 interface AudioPlayerProps {
   src?: string;
 }
-
-const format = (sec: number) => {
-  if (!Number.isFinite(sec)) return "0:00";
-  const m = Math.floor(sec / 60);
-  const s = Math.floor(sec % 60)
-    .toString()
-    .padStart(2, "0");
-  return `${m}:${s}`;
-};
 
 export default function AudioPlayer({ src }: AudioPlayerProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -79,8 +71,8 @@ export default function AudioPlayer({ src }: AudioPlayerProps) {
             aria-label="재생 위치"
           />
           <S.Times>
-            <span>{format(current)}</span>
-            <span>{format(duration)}</span>
+            <span>{formatTime(current)}</span>
+            <span>{formatTime(duration)}</span>
           </S.Times>
         </S.ProgressWrap>
       </S.Body>

@@ -1,16 +1,16 @@
 import { useRef, type PointerEvent } from "react";
 import styled from "styled-components";
-import { teams, type TeamId } from "@/data/teams";
+import { teams } from "@/data/teams";
 import { BOOTH_SIZE, PLAN_HEIGHT, PLAN_WIDTH, booths, planY, walls, type Booth } from "../booths";
 
 type Props = {
-  selectedTeam: TeamId | null;
+  selected: Pick<Booth, "team" | "zone"> | null;
   onSelect: (booth: Booth, element: HTMLButtonElement) => void;
 };
 
 const DRAG_TOLERANCE = 6; // 이보다 많이 움직였으면 도면을 끈 것으로 보고 클릭으로 치지 않음
 
-export default function FloorPlan({ selectedTeam, onSelect }: Props) {
+export default function FloorPlan({ selected, onSelect }: Props) {
   const pressedAt = useRef({ x: 0, y: 0 });
 
   const onPointerDown = (e: PointerEvent) => {
@@ -81,24 +81,27 @@ export default function FloorPlan({ selectedTeam, onSelect }: Props) {
         </g>
       </svg>
 
-      {booths.map((booth) => (
-        <BoothButton
-          key={booth.id}
-          type="button"
-          $active={booth.team === selectedTeam}
-          style={{ left: booth.x, top: booth.y }}
-          aria-label={`${booth.team}팀 ${teams[booth.team].join(" ")} 도슨트 재생`}
-          aria-pressed={booth.team === selectedTeam}
-          onPointerDown={onPointerDown}
-          onClick={(e) => {
-            const moved = Math.hypot(e.clientX - pressedAt.current.x, e.clientY - pressedAt.current.y);
-            if (e.detail > 0 && moved > DRAG_TOLERANCE) return;
-            onSelect(booth, e.currentTarget);
-          }}
-        >
-          {booth.team}
-        </BoothButton>
-      ))}
+      {booths.map((booth) => {
+        const active = booth.team === selected?.team && booth.zone === selected.zone;
+        return (
+          <BoothButton
+            key={booth.id}
+            type="button"
+            $active={active}
+            style={{ left: booth.x, top: booth.y }}
+            aria-label={`${booth.team}팀 ${teams[booth.team].join(" ")} 도슨트 재생`}
+            aria-pressed={active}
+            onPointerDown={onPointerDown}
+            onClick={(e) => {
+              const moved = Math.hypot(e.clientX - pressedAt.current.x, e.clientY - pressedAt.current.y);
+              if (e.detail > 0 && moved > DRAG_TOLERANCE) return;
+              onSelect(booth, e.currentTarget);
+            }}
+          >
+            {booth.team}
+          </BoothButton>
+        );
+      })}
     </Plan>
   );
 }
