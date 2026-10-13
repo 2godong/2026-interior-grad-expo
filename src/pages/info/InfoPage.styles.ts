@@ -116,4 +116,11 @@ export const Footer = styled.footer`
   font-weight: 400;
   color: ${({ theme }) => theme.colors.fg.accent};
   margin-bottom: 15px;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+`;
+
+export const EasterEgg = styled.span`
+  text-underline-offset: 3px;
+  margin-left: 5px;
 `;

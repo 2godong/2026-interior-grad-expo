@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { BackHeader } from "@/components/layout/Header";
 import { getThemeMode } from "@/styles/themeMode";
 import mainPoster from "@/assets/onboarding/main_poster.webp";
@@ -11,7 +12,29 @@ const guides = [
   "프로젝트 리스트에서 모든 작품을 차례로 볼 수 있으며 작품을 누르면 사진과 설명을 함께 볼 수 있습니다.",
 ];
 
+const EASTER_EGG_CLICKS = 8;
+const EASTER_EGG_DURATION = 3000;
+
 export default function InfoPage() {
+  const clickCount = useRef(0);
+  const hideTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [showEasterEgg, setShowEasterEgg] = useState(false);
+
+  useEffect(() => () => clearTimeout(hideTimer.current), []);
+
+  const handleFooterClick = () => {
+    clickCount.current += 1;
+    if (clickCount.current < EASTER_EGG_CLICKS) return;
+
+    clickCount.current = 0;
+    setShowEasterEgg(true);
+    clearTimeout(hideTimer.current);
+    hideTimer.current = setTimeout(
+      () => setShowEasterEgg(false),
+      EASTER_EGG_DURATION,
+    );
+  };
+
   return (
     <S.Page>
       <BackHeader subtitle="Exhibition Info" title="전시 정보" />
@@ -68,9 +91,10 @@ export default function InfoPage() {
         </S.GuideList>
       </S.Guide>
 
-      <S.Footer>
+      <S.Footer onClick={handleFooterClick}>
         DSID 덕성여자대학교 실내디자인전공 졸업전시회 x 덕성여자대학교
         멋쟁이사자처럼
+        {showEasterEgg && <S.EasterEgg>SYSR</S.EasterEgg>}
       </S.Footer>
     </S.Page>
   );
