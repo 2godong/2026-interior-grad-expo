@@ -1,5 +1,6 @@
 import type { ListContainerProps } from "../components/List/ListContainer";
 import { img } from "./docentImages";
+import { audio } from "./docentAudio";
 
 export type DocentBlock =
   | { type: "text"; value: string }
@@ -32,7 +33,8 @@ export const projects: Project[] = [
     zone: "model",
     members: ["김다빈", "김도희", "안승희"],
     title: "수밀(水密)의 해체",
-    duration: "0:00",
+    duration: "3:52",
+    audio: audio("01-model"),
     thumbnail: img("01-model-main"),
     content: [
       { type: "image", src: img("01-model01") },
@@ -117,7 +119,8 @@ export const projects: Project[] = [
     zone: "media",
     members: ["김다빈", "김도희", "안승희"],
     title: "미식(微息)",
-    duration: "0:00",
+    duration: "3:49",
+    audio: audio("01-md"),
     thumbnail: img("01-md-main"),
     content: [
       { type: "image", src: img("01-md01") },
@@ -201,7 +204,8 @@ export const projects: Project[] = [
     zone: "model",
     members: ["이주희", "이채린", "최예슬"],
     title: "The Cradle 2040",
-    duration: "0:00",
+    duration: "2:07",
+    audio: audio("02-model"),
     thumbnail: img("02-model-main"),
     content: [
       {
@@ -250,7 +254,8 @@ export const projects: Project[] = [
     zone: "media",
     members: ["이주희", "이채린", "최예슬"],
     title: "AGI Colosseum",
-    duration: "0:00",
+    duration: "2:26",
+    audio: audio("02-md"),
     thumbnail: img("02-md-main"),
     content: [
       {
@@ -303,7 +308,8 @@ AGI 콜로세움은 인간에게 남겨진 시간을 어떻게 사용할 것인�
     zone: "model",
     members: ["강지인", "안수연"],
     title: "RE:BOND",
-    duration: "0:00",
+    duration: "2:15",
+    audio: audio("03-model"),
     thumbnail: img("03-model-main"),
     content: [
       {
@@ -332,7 +338,8 @@ AGI 콜로세움은 인간에게 남겨진 시간을 어떻게 사용할 것인�
     zone: "media",
     members: ["강지인", "안수연"],
     title: "BEE-TWEEN",
-    duration: "0:00",
+    duration: "1:36",
+    audio: audio("03-md"),
     thumbnail: img("03-md-main"),
     content: [
       {
@@ -363,7 +370,8 @@ AGI 콜로세움은 인간에게 남겨진 시간을 어떻게 사용할 것인�
     zone: "model",
     members: ["김소은", "안채연", "차수연"],
     title: "해도해도 너무하네",
-    duration: "0:00",
+    duration: "4:00",
+    audio: audio("04-model"),
     thumbnail: img("04-model-main"),
     content: [
       {
@@ -411,7 +419,8 @@ Blue는 짧은 파장이 주변으로 흩어지는 ‘산란’의 현상을 디
     zone: "media",
     members: ["김소은", "안채연", "차수연"],
     title: "CORE45",
-    duration: "0:00",
+    duration: "3:37",
+    audio: audio("04-md"),
     thumbnail: img("04-md-main"),
     content: [
       {
@@ -446,7 +455,8 @@ AI가 우리 일상에 성큼 다가온 요즘, '서로 다른 존재가 함께 
     zone: "model",
     members: ["구세연", "김성은", "박윤지"],
     title: "소소素昭",
-    duration: "0:00",
+    duration: "3:44",
+    audio: audio("05-model"),
     thumbnail: img("05-model-main"),
     content: [
       {
@@ -510,7 +520,8 @@ AI가 우리 일상에 성큼 다가온 요즘, '서로 다른 존재가 함께 
     zone: "media",
     members: ["구세연", "김성은", "박윤지"],
     title: "ON : TIQUE | 앤틱을 켜다",
-    duration: "0:00",
+    duration: "3:30",
+    audio: audio("05-md"),
     thumbnail: img("05-md-main"),
     content: [
       {
@@ -562,7 +573,8 @@ ON : TIQUE는 끊어진 거리의 흐름을 다시 연결하고, 사라져가는
     zone: "model",
     members: ["문가은", "문성희"],
     title: "POV : Point of View",
-    duration: "0:00",
+    duration: "2:41",
+    audio: audio("06-model"),
     thumbnail: img("06-model-main"),
     content: [
       {
@@ -596,7 +608,8 @@ POV는 단절된 도시 속 각자의 방을 벗어나, 취향을 매개로 시�
     zone: "media",
     members: ["문가은", "문성희"],
     title: "EPILOGE",
-    duration: "0:00",
+    duration: "3:19",
+    audio: audio("06-md"),
     thumbnail: img("06-md-main"),
     content: [
       {
@@ -639,7 +652,8 @@ POV는 단절된 도시 속 각자의 방을 벗어나, 취향을 매개로 시�
     zone: "model",
     members: ["김다연", "문세희", "최예림"],
     title: "EXIT FIT",
-    duration: "0:00",
+    duration: "3:31",
+    audio: audio("07-model"),
     thumbnail: img("07-model-main"),
     content: [
       { type: "image", src: img("07-model01") },
@@ -682,7 +696,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "media",
     members: ["김다연", "문세희", "최예림"],
     title: "OVER-LAY",
-    duration: "0:00",
+    duration: "3:21",
+    audio: audio("07-md"),
     thumbnail: img("07-md-main"),
     content: [
       { type: "image", src: img("07-md01") },
@@ -719,7 +734,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "model",
     members: ["이다빈"],
     title: "헌혈견 네트워크 센터",
-    duration: "0:00",
+    duration: "4:05",
+    audio: audio("08-model"),
     thumbnail: img("08-model-main"),
     content: [
       { type: "image", src: img("08-model01") },
@@ -764,7 +780,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "media",
     members: ["이다빈"],
     title: "이음식당",
-    duration: "0:00",
+    duration: "2:21",
+    audio: audio("08-md"),
     thumbnail: img("08-md-main"),
     content: [
       { type: "image", src: img("08-md01") },
@@ -792,7 +809,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "model",
     members: ["김정연", "이다솔", "조민서"],
     title: "애온지실 哀-愛溫之室",
-    duration: "0:00",
+    duration: "2:12",
+    audio: audio("09-model"),
     thumbnail: img("09-model-main"),
     content: [
       {
@@ -817,7 +835,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "media",
     members: ["김정연", "이다솔", "조민서"],
     title: "이야기가 머무는 곳 Filmoir",
-    duration: "0:00",
+    duration: "2:31",
+    audio: audio("09-md"),
     thumbnail: img("09-md-main"),
     content: [
       {
@@ -846,7 +865,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "model",
     members: ["고예서", "이수민"],
     title: "윤율 - 생체리듬회복센터",
-    duration: "0:00",
+    duration: "2:26",
+    audio: audio("10-model"),
     thumbnail: img("10-model-main"),
     content: [
       {
@@ -887,7 +907,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "media",
     members: ["고예서", "이수민"],
     title: "품은 뜰 :",
-    duration: "0:00",
+    duration: "2:59",
+    audio: audio("10-md"),
     thumbnail: img("10-md-main"),
     content: [
       {
@@ -929,7 +950,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "model",
     members: ["배수영", "정윤서"],
     title: "별과 시간",
-    duration: "0:00",
+    duration: "2:59",
+    audio: audio("11-model"),
     thumbnail: img("11-model-main"),
     content: [
       { type: "image", src: img("11-model01") },
@@ -967,7 +989,8 @@ EXIT-FIT은 기존 헬스시설이 가진 ‘지루하고 어렵다’는 이미
     zone: "media",
     members: ["배수영", "정윤서"],
     title: "계절온실",
-    duration: "0:00",
+    duration: "3:07",
+    audio: audio("11-md"),
     thumbnail: img("11-md-main"),
     content: [
       { type: "image", src: img("11-md01") },

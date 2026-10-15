@@ -74,7 +74,7 @@ export default function DocentPage() {
             </S.SheetTitleInner>
           </S.SheetTitle>
 
-          <AudioPlayer key={`${work.teamId}-${work.zone}`} src={work.audio} />
+          <AudioPlayer work={work} />
         </S.SheetTop>
 
         <S.InfoTable>

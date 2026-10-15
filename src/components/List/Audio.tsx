@@ -12,6 +12,8 @@ interface AudioProps {
   title: string;
   currentTime: string;
   duration: string;
+  /** 있으면 아이콘을 눌러 재생/정지 전환 */
+  onToggle?: () => void;
 }
 
 export default function Audio({
@@ -22,12 +24,20 @@ export default function Audio({
   title,
   currentTime,
   duration,
+  onToggle,
 }: AudioProps) {
   const status = isPlaying ? "재생 중" : "일시 정지";
 
   return (
     <S.AudioContainer>
-      <S.IconBox>
+      <S.IconBox
+        {...(onToggle && {
+          as: "button",
+          type: "button",
+          onClick: onToggle,
+          "aria-label": isPlaying ? "일시 정지" : "재생",
+        })}
+      >
         <S.PlayIcon src={isPlaying ? playIcon : stopIcon} alt="" />
       </S.IconBox>
 

@@ -1,9 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <meta name="theme-color" content="#49494B" />
     <script>
       // React보다 먼저 모드를 정해야 첫 화면 배경이 깜빡이지 않음
@@ -12,24 +15,42 @@
       (function () {
         var KEY = "exhibition-theme";
         var BG = { dark: "#49494B", light: "#F7F7F7" };
-        var isMode = function (m) { return m === "dark" || m === "light"; };
+        var isMode = function (m) {
+          return m === "dark" || m === "light";
+        };
 
         var mode = new URLSearchParams(location.search).get("theme");
         if (!isMode(mode)) {
-          try { mode = sessionStorage.getItem(KEY); } catch (e) {}
+          try {
+            mode = sessionStorage.getItem(KEY);
+          } catch (e) {}
         }
         if (!isMode(mode)) mode = Math.random() < 0.5 ? "dark" : "light";
         // 인앱 브라우저·개인정보 보호 모드에서는 storage 접근이 막힐 수 있음
-        try { sessionStorage.setItem(KEY, mode); } catch (e) {}
+        try {
+          sessionStorage.setItem(KEY, mode);
+        } catch (e) {}
 
         var root = document.documentElement;
         root.dataset.theme = mode;
         root.style.colorScheme = mode;
         root.style.background = BG[mode];
-        document.querySelector('meta[name="theme-color"]').setAttribute("content", BG[mode]);
+        document
+          .querySelector('meta[name="theme-color"]')
+          .setAttribute("content", BG[mode]);
       })();
     </script>
-    <title>my-app</title>
+    <title>사이는 공간: (비어있는 곳)이 아니다</title>
+    <meta
+      name="description"
+      content="2026 GRADUATION EXHIBITION · DSID × DSLIKELION"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="사이는 공간: (비어있는 곳)이 아니다" />
+    <meta
+      property="og:description"
+      content="2026 GRADUATION EXHIBITION · DSID × DSLIKELION"
+    />
   </head>
   <body>
     <div id="root"></div>
