@@ -6,6 +6,13 @@ import { BackHeader } from "@/components/layout/Header";
 import { paths } from "@/paths";
 import * as S from "./DocentPage.styles";
 
+// **내용** 으로 감싼 부분을 굵게 표시 (줄바꿈을 포함해도 됨)
+function renderBold(text: string) {
+  return text
+    .split(/\*\*([\s\S]+?)\*\*/)
+    .map((part, i) => (i % 2 ? <strong key={i}>{part}</strong> : part));
+}
+
 export default function DocentPage() {
   const { teamId, zone } = useParams();
   const work = getWork(teamId, zone);
@@ -85,7 +92,7 @@ export default function DocentPage() {
         {work.content?.length ? (
           work.content.map((block, i) =>
             block.type === "text" ? (
-              <S.Paragraph key={i}>{block.value}</S.Paragraph>
+              <S.Paragraph key={i}>{renderBold(block.value)}</S.Paragraph>
             ) : (
               <S.Image key={i} src={block.src} alt="" />
             ),
