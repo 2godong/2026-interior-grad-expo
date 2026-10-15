@@ -11,6 +11,8 @@ export interface AudioState {
   play: (work: Project) => void;
   toggle: () => void;
   seek: (time: number) => void;
+  /** 재생을 멈추고 작품 선택도 해제해 오디오바를 닫는다 */
+  dismiss: () => void;
 }
 
 export const AudioContext = createContext<AudioState | null>(null);

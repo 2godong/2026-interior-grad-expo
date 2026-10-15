@@ -10,7 +10,7 @@ export default function ListPage() {
   const { track } = useAudio();
 
   return (
-    <S.ListPage $bottomSpace={track ? AUDIO_BAR_SPACE : 0}>
+    <S.ListPage $bottomSpace={track ? AUDIO_BAR_SPACE : 20}>
       <TabHeader title="프로젝트 리스트" />
       <S.List>
         {projects.map((p) => (

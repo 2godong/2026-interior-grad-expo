@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSearchParams } from "react-router";
 import {
   TransformComponent,
@@ -28,29 +28,50 @@ export default function MapPage() {
 
   const [params, setParams] = useSearchParams();
   const { track, play } = useAudio();
-  const team = params.get("team");
-  const zone = params.get("zone");
-  // 주소로 고른 부스가 없으면 지금 재생 중인 작품의 부스를 표시
+  // 지금 재생 중(또는 일시 정지)인 작품의 부스를 표시
   // (부스 번호는 "01", 작품 데이터의 teamId는 "1")
-  const selected: Pick<Booth, "team" | "zone"> | null =
-    isTeamId(team) && (zone === "media" || zone === "model")
-      ? { team, zone }
-      : track
-        ? {
-            team: track.teamId.padStart(2, "0") as Booth["team"],
-            zone: track.zone as Booth["zone"],
-          }
-        : null;
+  const selected: Pick<Booth, "team" | "zone"> | null = track
+    ? {
+        team: track.teamId.padStart(2, "0") as Booth["team"],
+        zone: track.zone as Booth["zone"],
+      }
+    : null;
 
-  const selectBooth = (booth: Booth, element: HTMLButtonElement) => {
+  // ?team=01&zone=model 로 들어오면 그 작품을 선택 (자동 재생이 막히면 일시 정지 상태로 표시)
+  useEffect(() => {
+    const team = params.get("team");
+    const zone = params.get("zone");
+    if (!isTeamId(team) || (zone !== "media" && zone !== "model")) return;
+    const work = getWork(String(Number(team)), zone);
+    if (work) play(work);
+    // 처음 들어왔을 때 한 번만
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // 주소의 team·zone을 선택된 부스와 맞춘다 (오디오바가 닫히면 주소에서도 지움)
+  const selectedTeam = selected?.team;
+  const selectedZone = selected?.zone;
+  const hadSelection = useRef(false);
+  useEffect(() => {
+    if (selectedTeam && selectedZone) hadSelection.current = true;
+    // 첫 렌더에서 아직 선택 전이면 주소로 들어온 값을 지우지 않는다
+    else if (!hadSelection.current) return;
     setParams(
       (prev) => {
-        prev.set("team", booth.team);
-        prev.set("zone", booth.zone);
+        if (selectedTeam && selectedZone) {
+          prev.set("team", selectedTeam);
+          prev.set("zone", selectedZone);
+        } else {
+          prev.delete("team");
+          prev.delete("zone");
+        }
         return prev;
       },
       { replace: true },
     );
+  }, [selectedTeam, selectedZone, setParams]);
+
+  const selectBooth = (booth: Booth, element: HTMLButtonElement) => {
     // 부스를 바꾸면 그 작품을 처음부터 재생
     const work = getWork(String(Number(booth.team)), booth.zone);
     if (work) play(work);

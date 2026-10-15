@@ -29,17 +29,27 @@ export default function AudioProvider({ children }: { children: ReactNode }) {
             el.load();
           }
         }
-        if (work.audio) void el.play();
+        // 사용자 조작 없이 불리면 브라우저가 자동 재생을 막을 수 있음 → 일시 정지 상태로 둔다
+        if (work.audio) el.play().catch(() => {});
       },
       toggle: () => {
         const el = audio();
         if (!el || !el.currentSrc) return;
-        if (el.paused) void el.play();
+        if (el.paused) el.play().catch(() => {});
         else el.pause();
       },
       seek: (time) => {
         const el = audio();
         if (el) el.currentTime = time;
+      },
+      dismiss: () => {
+        const el = audio();
+        if (el) {
+          el.pause();
+          el.removeAttribute("src");
+          el.load();
+        }
+        setTrack(undefined);
       },
     };
   }, [track, isPlaying, current, duration]);
