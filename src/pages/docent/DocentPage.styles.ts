@@ -139,14 +139,17 @@ export const Paragraph = styled.p`
   ${fonts.body}
   margin: 0 8px 20px;
   white-space: pre-line;
+
+  strong {
+    font-weight: 600;
+  }
 `;
 
 export const Image = styled.img`
   display: block;
   width: calc(100% - 16px);
-  aspect-ratio: 4 / 3;
+  height: auto; /* 원본 비율 그대로 — 가로·세로 이미지 모두 잘리지 않음 */
   margin: 8px 8px 24px;
-  object-fit: cover;
   background: ${colors.bg.placeholder};
 `;
 
