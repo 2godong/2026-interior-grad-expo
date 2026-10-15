@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useSearchParams } from "react-router";
 import {
   TransformComponent,
@@ -6,13 +6,13 @@ import {
   type ReactZoomPanPinchContentRef,
 } from "react-zoom-pan-pinch";
 import styled from "styled-components";
-import AudioBar from "@/components/List/Audio";
+import { useAudio } from "@/components/audio/audioContext";
+import NowPlayingBar from "@/components/List/NowPlayingBar";
 import { AUDIO_BAR_SPACE } from "@/components/List/Audio.styles";
 import { TabHeader } from "@/components/layout/Header";
 import { getWork } from "@/constants/projects";
 import { isTeamId } from "@/data/teams";
 import { layout } from "@/styles/media";
-import { formatTime } from "@/utils/formatTime";
 import type { Booth } from "./booths";
 import ExhibitionPanel from "./components/ExhibitionPanel";
 import FloorPlan from "./components/FloorPlan";
@@ -27,16 +27,20 @@ export default function MapPage() {
   useWheelZoom(viewport, zoom);
 
   const [params, setParams] = useSearchParams();
+  const { track, play } = useAudio();
   const team = params.get("team");
   const zone = params.get("zone");
+  // 주소로 고른 부스가 없으면 지금 재생 중인 작품의 부스를 표시
+  // (부스 번호는 "01", 작품 데이터의 teamId는 "1")
   const selected: Pick<Booth, "team" | "zone"> | null =
-    isTeamId(team) && (zone === "media" || zone === "model") ? { team, zone } : null;
-  // 부스 번호는 "01", 작품 데이터의 teamId는 "1"
-  const work = selected ? getWork(String(Number(selected.team)), selected.zone) : undefined;
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [current, setCurrent] = useState(0);
-  const [duration, setDuration] = useState(0);
+    isTeamId(team) && (zone === "media" || zone === "model")
+      ? { team, zone }
+      : track
+        ? {
+            team: track.teamId.padStart(2, "0") as Booth["team"],
+            zone: track.zone as Booth["zone"],
+          }
+        : null;
 
   const selectBooth = (booth: Booth, element: HTMLButtonElement) => {
     setParams(
@@ -47,6 +51,9 @@ export default function MapPage() {
       },
       { replace: true },
     );
+    // 부스를 바꾸면 그 작품을 처음부터 재생
+    const work = getWork(String(Number(booth.team)), booth.zone);
+    if (work) play(work);
     zoom.current?.zoomToElement(element, {
       scale: FOCUS_SCALE,
       animationTime: 450,
@@ -81,34 +88,8 @@ export default function MapPage() {
         </TransformWrapper>
       </Viewport>
 
-      {/* 부스를 바꾸면 src가 바뀌면서 처음부터 자동 재생 */}
-      <audio
-        src={work?.audio}
-        autoPlay
-        onEmptied={() => {
-          setIsPlaying(false);
-          setCurrent(0);
-          setDuration(0);
-        }}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
-        onTimeUpdate={(e) => setCurrent(e.currentTarget.currentTime)}
-        onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
-      />
-      {/* 선택한 부스가 없으면 전시 정보, 있으면 그 작품의 오디오바 */}
-      {work && selected ? (
-        <AudioBar
-          teamId={work.teamId}
-          zone={work.zone}
-          isPlaying={isPlaying}
-          teamName={`${selected.team}팀`}
-          title={work.title}
-          currentTime={formatTime(current)}
-          duration={duration ? formatTime(duration) : work.duration}
-        />
-      ) : (
-        <ExhibitionPanel />
-      )}
+      {/* 재생한 작품이 있으면 오디오바, 없으면 전시 정보 */}
+      {track ? <NowPlayingBar /> : <ExhibitionPanel />}
     </Page>
   );
 }

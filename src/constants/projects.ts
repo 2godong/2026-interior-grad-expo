@@ -1,5 +1,6 @@
 import type { ListContainerProps } from "../components/List/ListContainer";
 import { img } from "./docentImages";
+import { audio } from "./docentAudio";
 
 export type DocentBlock =
   | { type: "text"; value: string }
@@ -32,7 +33,8 @@ export const projects: Project[] = [
     zone: "model",
     members: ["김다빈", "김도희", "안승희"],
     title: "수밀(水密)의 해체",
-    duration: "0:00",
+    duration: "3:53",
+    audio: audio("01-model"),
     thumbnail: img("01-model-main"),
     content: [
       { type: "image", src: img("01-model01") },
@@ -117,7 +119,8 @@ export const projects: Project[] = [
     zone: "media",
     members: ["김다빈", "김도희", "안승희"],
     title: "미식(微息)",
-    duration: "0:00",
+    duration: "3:49",
+    audio: audio("01-md"),
     thumbnail: img("01-md-main"),
     content: [
       { type: "image", src: img("01-md01") },

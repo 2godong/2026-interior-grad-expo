@@ -35,6 +35,8 @@ export const IconBox = styled.div`
   width: 60px;
   height: 60px;
   flex-shrink: 0;
+  padding: 0;
+  border: none;
   background: ${colors.bg.panelIcon};
 `;
 

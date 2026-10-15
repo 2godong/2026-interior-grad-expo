@@ -6,6 +6,7 @@ import {
   useNavigationType,
 } from "react-router";
 import styled from "styled-components";
+import AudioProvider from "@/components/audio/AudioProvider";
 import { gutterX, layout, media } from "@/styles/media";
 import { useAppHeight } from "./useAppHeight";
 
@@ -24,13 +25,15 @@ export default function AppLayout() {
   );
 
   return (
-    <Backdrop>
-      <Frame>
-        <Scroll ref={scrollRef} $fullBleed={fullBleed}>
-          <Outlet />
-        </Scroll>
-      </Frame>
-    </Backdrop>
+    <AudioProvider>
+      <Backdrop>
+        <Frame>
+          <Scroll ref={scrollRef} $fullBleed={fullBleed}>
+            <Outlet />
+          </Scroll>
+        </Frame>
+      </Backdrop>
+    </AudioProvider>
   );
 }
 
