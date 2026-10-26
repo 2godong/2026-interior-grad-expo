@@ -6,14 +6,18 @@ type Zone = "model" | "media";
 const theme = themes[getThemeMode()];
 const colors = theme.colors;
 
-export const ListContainer = styled.div`
+// 다크 모드에서 모델존(채운 마커)은 재생 중이어도 마커는 그대로 두고 글자색만 바꾼다
+const markerActive = (zone: Zone, active: boolean) =>
+  active && !(getThemeMode() === "dark" && zone === "model");
+
+export const ListContainer = styled.div<{ $active?: boolean }>`
   padding: 23px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   text-decoration: none;
-  color: inherit;
+  color: ${({ $active }) => ($active ? colors.fg.active : "inherit")};
   &:nth-child(odd) {
     border-bottom: 1px solid ${theme.colors.bg.placeholder};
   }
@@ -35,7 +39,7 @@ export const NumberContainer = styled.div`
   align-items: flex-start;
 `;
 
-export const NumBox = styled.div<{ $zone: Zone }>`
+export const NumBox = styled.div<{ $zone: Zone; $active: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,18 +48,30 @@ export const NumBox = styled.div<{ $zone: Zone }>`
   flex-shrink: 0;
   box-sizing: border-box;
 
-  background: ${({ $zone }) =>
-    $zone === "model" ? colors.bg.marker : "transparent"};
+  background: ${({ $zone, $active }) =>
+    markerActive($zone, $active)
+      ? colors.bg.markerActive
+      : $zone === "model"
+        ? colors.bg.marker
+        : "transparent"};
   border: 1px solid
-    ${({ $zone }) =>
-      $zone === "model" ? colors.bg.marker : colors.stroke.marker};
+    ${({ $zone, $active }) =>
+      markerActive($zone, $active)
+        ? colors.stroke.markerActive
+        : $zone === "model"
+          ? colors.bg.marker
+          : colors.stroke.marker};
 `;
 
-export const Num = styled.span<{ $zone: Zone }>`
+export const Num = styled.span<{ $zone: Zone; $active: boolean }>`
   line-height: 1;
   font-variant-numeric: tabular-nums;
-  color: ${({ $zone }) =>
-    $zone === "model" ? colors.fg.onMarker : colors.fg.primary};
+  color: ${({ $zone, $active }) =>
+    markerActive($zone, $active)
+      ? colors.fg.onMarkerActive
+      : $zone === "model"
+        ? colors.fg.onMarker
+        : colors.fg.primary};
   ${theme.fonts.body}
 `;
 

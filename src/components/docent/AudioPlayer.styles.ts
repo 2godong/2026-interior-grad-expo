@@ -44,16 +44,19 @@ export const IconButton = styled.button`
   width: 44px;
   height: 44px;
   flex-shrink: 0;
+  padding: 0; /* iOS Safari 등 버튼 기본 패딩 때문에 아이콘이 줄어들지 않게 */
   border: none;
   background: ${colors.bg.panelIcon};
   cursor: pointer;
 `;
 
 // 재생 중: 이퀄라이저(playIcon), 정지 중: 네모(stopIcon)
+// 버튼 안 % 높이는 브라우저마다 다르게 계산돼서 px로 고정
 export const Icon = styled.img`
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
 `;
 
 export const ProgressWrap = styled.div`

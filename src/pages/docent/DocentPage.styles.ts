@@ -68,14 +68,14 @@ export const SheetTop = styled.div`
   top: ${HEADER_HEIGHT}px;
   z-index: 1;
   margin: 0 -16px;
-  padding: 0 16px 16px;
+  padding: 8px 16px 16px;
   background: ${colors.bg.page};
 `;
 
 export const Handle = styled.div`
   width: 32px;
   height: 3px;
-  margin: 8px auto 16px;
+  margin: 0 auto 16px;
   border-radius: 2px;
   background: ${colors.bg.handle};
 `;

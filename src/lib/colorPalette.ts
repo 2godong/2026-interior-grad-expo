@@ -83,7 +83,7 @@ export const lightColors: ColorsType = {
     primary: grey[800],
     accent: grey[800],
     muted: grey[700],
-    active: brand.lime,
+    active: grey[800],
     onMarker: brand.yellow,
     onMarkerActive: grey[800],
     onTab: brand.yellow,
