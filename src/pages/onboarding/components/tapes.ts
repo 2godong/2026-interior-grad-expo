@@ -18,7 +18,7 @@ type TapeSet = {
   offsetBottom: number;
   shiftY: number; // 레이아웃(포스터 크기)에 영향 없이 보이는 위치만 아래로 내림
   tapes: [Tape, Tape];
-  label: { x: number; y: number; angle: number };
+  label: { x: number; y: number; angle: number; maxWidth: number }; // maxWidth: 라벨이 테이프 밖으로 넘치지 않는 최대 폭
 };
 
 export const TAPE_OPACITY = 0.76;
@@ -52,7 +52,7 @@ export const tapeSets: Record<ThemeMode, TapeSet> = {
         duration: 750,
       },
     ],
-    label: { x: 127, y: 70, angle: 14.5 },
+    label: { x: 127, y: 70, angle: 14.5, maxWidth: 215 },
   },
   dark: {
     width: 325,
@@ -78,7 +78,7 @@ export const tapeSets: Record<ThemeMode, TapeSet> = {
         duration: 750,
       },
     ],
-    label: { x: 131, y: 116, angle: -10.4 },
+    label: { x: 131, y: 116, angle: -10.4, maxWidth: 215 },
   },
 };
 
