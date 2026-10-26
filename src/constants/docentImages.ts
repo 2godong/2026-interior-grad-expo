@@ -11,7 +11,7 @@ for (const [path, url] of Object.entries(modules)) {
   images[name] = url;
 }
 
-/** 예: img("01-model-main") → assets/docent/01-model-main.png 의 URL */
+/** 예: img("01-model-main") → assets/docent/01-model-main.webp 의 URL */
 export function img(name: string) {
   const url = images[name];
   if (!url && import.meta.env.DEV) {
