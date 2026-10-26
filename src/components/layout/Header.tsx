@@ -1,16 +1,74 @@
-import { NavLink, useLocation, useNavigate } from "react-router";
-import styled, { css } from "styled-components";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
+import styled, { css, keyframes } from "styled-components";
 import { paths } from "@/paths";
 import { layout } from "@/styles/media";
 
 const GALLERY = "Space Sophora Gallery B1";
 
-// 헤더1: 도면·리스트 페이지. 오른쪽에 도면/리스트 전환 탭
+// 처음 한 번만 전시 정보 버튼 위치를 알려주는 말풍선
+const INFO_HINT_KEY = "infoHintSeen";
+const INFO_HINT_DURATION = 3000;
+
+function useInfoHint() {
+  const [show, setShow] = useState(() => {
+    try {
+      return !localStorage.getItem(INFO_HINT_KEY);
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    if (!show) return;
+    try {
+      localStorage.setItem(INFO_HINT_KEY, "1");
+    } catch {
+      // 저장이 막혀 있으면 다음 방문에도 다시 보인다
+    }
+    const timer = setTimeout(() => setShow(false), INFO_HINT_DURATION);
+    return () => clearTimeout(timer);
+  }, [show]);
+
+  return [show, () => setShow(false)] as const;
+}
+
+// 헤더1: 도면·리스트 페이지. 장소 옆에 전시 정보 버튼, 오른쪽에 도면/리스트 전환 탭
 export function TabHeader({ title }: { title: string }) {
+  const [showHint, hideHint] = useInfoHint();
+
   return (
     <Bar>
       <Titles>
-        <Subtitle>{GALLERY}</Subtitle>
+        <SubtitleRow>
+          <Subtitle>{GALLERY}</Subtitle>
+          <InfoAnchor>
+            <InfoLink to={paths.info} aria-label="전시 정보">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden
+              >
+                <circle
+                  cx="8"
+                  cy="8"
+                  r="7.2"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                />
+                <path d="M8 7v4.5" stroke="currentColor" strokeWidth="1.4" />
+                <circle cx="8" cy="4.6" r="0.9" fill="currentColor" />
+              </svg>
+            </InfoLink>
+            {showHint && (
+              <Bubble role="status" onClick={hideHint}>
+                전시 정보는 여기에서 볼 수 있어요
+              </Bubble>
+            )}
+          </InfoAnchor>
+        </SubtitleRow>
         <Title>{title}</Title>
       </Titles>
       <Tabs aria-label="보기 전환">
@@ -109,6 +167,53 @@ const Title = styled.h1`
   font-size: 20px;
   line-height: 28px;
   font-weight: 300;
+`;
+
+const SubtitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2px;
+`;
+
+const InfoAnchor = styled.div`
+  position: relative;
+  display: flex;
+`;
+
+const InfoLink = styled(Link)`
+  display: flex;
+  margin: -6px;
+  padding: 6px 6px 6px 10px;
+  color: inherit;
+`;
+
+const bubbleIn = keyframes`
+  from { opacity: 0; transform: translate(-50%, -4px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+`;
+
+const Bubble = styled.div`
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 12px;
+  white-space: nowrap;
+  ${({ theme }) => theme.fonts.caption};
+  background: ${({ theme }) => theme.colors.bg.tab};
+  color: ${({ theme }) => theme.colors.fg.onTab};
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  animation: ${bubbleIn} 0.25s ease-out;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: ${({ theme }) => theme.colors.bg.tab};
+  }
 `;
 
 const Tabs = styled.nav`
