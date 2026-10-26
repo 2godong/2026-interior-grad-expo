@@ -1,7 +1,7 @@
 import { projects } from "../../constants/projects";
 import * as S from "./ListPage.styles";
 import { TabHeader } from "@/components/layout/Header";
-import { useAudio } from "@/components/audio/audioContext";
+import { isSameWork, useAudio } from "@/components/audio/audioContext";
 import ListContainer from "../../components/List/ListContainer";
 import NowPlayingBar from "../../components/List/NowPlayingBar";
 import { AUDIO_BAR_SPACE } from "../../components/List/Audio.styles";
@@ -14,7 +14,11 @@ export default function ListPage() {
       <TabHeader title="프로젝트 리스트" />
       <S.List>
         {projects.map((p) => (
-          <ListContainer key={`${p.teamId}-${p.zone}`} {...p} />
+          <ListContainer
+            key={`${p.teamId}-${p.zone}`}
+            {...p}
+            active={isSameWork(track, p)}
+          />
         ))}
       </S.List>
       <NowPlayingBar />
