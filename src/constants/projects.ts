@@ -308,7 +308,7 @@ AGI 콜로세움은 인간에게 남겨진 시간을 어떻게 사용할 것인�
     zone: "model",
     members: ["강지인", "안수연"],
     title: "RE:BOND",
-    duration: "2:15",
+    duration: "1:36",
     audio: audio("03-model"),
     thumbnail: img("03-model-main"),
     content: [
@@ -338,7 +338,7 @@ AGI 콜로세움은 인간에게 남겨진 시간을 어떻게 사용할 것인�
     zone: "media",
     members: ["강지인", "안수연"],
     title: "BEE-TWEEN",
-    duration: "1:36",
+    duration: "2:15",
     audio: audio("03-md"),
     thumbnail: img("03-md-main"),
     content: [
