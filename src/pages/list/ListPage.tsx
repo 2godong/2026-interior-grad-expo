@@ -7,7 +7,7 @@ import NowPlayingBar from "../../components/List/NowPlayingBar";
 import { AUDIO_BAR_SPACE } from "../../components/List/Audio.styles";
 
 export default function ListPage() {
-  const { track } = useAudio();
+  const { track, play } = useAudio();
 
   return (
     <S.ListPage $bottomSpace={track ? AUDIO_BAR_SPACE : 20}>
@@ -18,6 +18,8 @@ export default function ListPage() {
             key={`${p.teamId}-${p.zone}`}
             {...p}
             active={isSameWork(track, p)}
+            // 지도와 같이 누르는 순간 재생 (클릭 안에서 불러야 모바일에서 안 막힘)
+            onSelect={() => play(p)}
           />
         ))}
       </S.List>
