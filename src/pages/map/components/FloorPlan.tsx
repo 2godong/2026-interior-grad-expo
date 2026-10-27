@@ -1,14 +1,22 @@
 import { useRef, type PointerEvent } from "react";
 import styled from "styled-components";
 import { teams } from "@/data/teams";
-import { BOOTH_SIZE, PLAN_HEIGHT, PLAN_WIDTH, booths, planY, walls, type Booth } from "../booths";
+import {
+  BOOTH_SIZE,
+  PLAN_HEIGHT,
+  PLAN_WIDTH,
+  booths,
+  planY,
+  walls,
+  type Booth,
+} from "../booths";
 
 type Props = {
   selected: Pick<Booth, "team" | "zone"> | null;
   onSelect: (booth: Booth, element: HTMLButtonElement) => void;
 };
 
-const DRAG_TOLERANCE = 6; // 이보다 많이 움직였으면 도면을 끈 것으로 보고 클릭으로 치지 않음
+const DRAG_TOLERANCE = 6;
 
 export default function FloorPlan({ selected, onSelect }: Props) {
   const pressedAt = useRef({ x: 0, y: 0 });
@@ -19,18 +27,27 @@ export default function FloorPlan({ selected, onSelect }: Props) {
 
   return (
     <Plan>
-      <svg width={PLAN_WIDTH} height={PLAN_HEIGHT} viewBox={`0 0 ${PLAN_WIDTH} ${PLAN_HEIGHT}`} aria-hidden>
+      <svg
+        width={PLAN_WIDTH}
+        height={PLAN_HEIGHT}
+        viewBox={`0 0 ${PLAN_WIDTH} ${PLAN_HEIGHT}`}
+        aria-hidden
+      >
         <g className="line">
           {walls.map((points, i) => (
             <polyline key={i} points={points.join(" ")} strokeWidth={2.4} />
           ))}
-          <line x1={197.7} y1={planY(449.1)} x2={197.7} y2={planY(543.7)} strokeWidth={2} />
-          {/* 아카이브 존 */}
+          <line
+            x1={197.7}
+            y1={planY(449.1)}
+            x2={197.7}
+            y2={planY(543.7)}
+            strokeWidth={2}
+          />
           <path
             d={`M158.8 ${planY(270)}H190.9M158.8 ${planY(304.4)}H190.9M155.2 ${planY(275.1)}V${planY(300)}M196.1 ${planY(275.1)}V${planY(300)}`}
             strokeWidth={1}
           />
-          {/* 입구 화살표 */}
           <path
             d={`M286 ${planY(806)}V${planY(892.6)}M273.5 ${planY(818.5)}L286 ${planY(806)}L298.5 ${planY(818.5)}`}
             strokeWidth={2.4}
@@ -55,9 +72,13 @@ export default function FloorPlan({ selected, onSelect }: Props) {
           </text>
         </g>
 
-        {/* 글자 폭은 Figma와 같게 고정 */}
         <g className="slogan">
-          <text x={52.9} y={planY(711)} textLength={40} lengthAdjust="spacingAndGlyphs">
+          <text
+            x={52.9}
+            y={planY(711)}
+            textLength={40}
+            lengthAdjust="spacingAndGlyphs"
+          >
             The
           </text>
           <text
@@ -82,7 +103,8 @@ export default function FloorPlan({ selected, onSelect }: Props) {
       </svg>
 
       {booths.map((booth) => {
-        const active = booth.team === selected?.team && booth.zone === selected.zone;
+        const active =
+          booth.team === selected?.team && booth.zone === selected.zone;
         return (
           <BoothButton
             key={booth.id}
@@ -93,7 +115,10 @@ export default function FloorPlan({ selected, onSelect }: Props) {
             aria-pressed={active}
             onPointerDown={onPointerDown}
             onClick={(e) => {
-              const moved = Math.hypot(e.clientX - pressedAt.current.x, e.clientY - pressedAt.current.y);
+              const moved = Math.hypot(
+                e.clientX - pressedAt.current.x,
+                e.clientY - pressedAt.current.y,
+              );
               if (e.detail > 0 && moved > DRAG_TOLERANCE) return;
               onSelect(booth, e.currentTarget);
             }}
@@ -142,9 +167,13 @@ const BoothButton = styled.button<{ $active: boolean }>`
   width: ${BOOTH_SIZE}px;
   height: ${BOOTH_SIZE}px;
   padding: 0;
-  border: 1px solid ${({ theme, $active }) => ($active ? theme.colors.stroke.markerActive : "transparent")};
-  background: ${({ theme, $active }) => ($active ? theme.colors.bg.markerActive : theme.colors.bg.marker)};
-  color: ${({ theme, $active }) => ($active ? theme.colors.fg.onMarkerActive : theme.colors.fg.onMarker)};
+  border: 1px solid
+    ${({ theme, $active }) =>
+      $active ? theme.colors.stroke.markerActive : "transparent"};
+  background: ${({ theme, $active }) =>
+    $active ? theme.colors.bg.markerActive : theme.colors.bg.marker};
+  color: ${({ theme, $active }) =>
+    $active ? theme.colors.fg.onMarkerActive : theme.colors.fg.onMarker};
   ${({ theme }) => theme.fonts.numeral};
   transition:
     background 0.2s,

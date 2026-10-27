@@ -82,7 +82,6 @@ const BlurredPic = styled.img`
   transform: scale(1.15);
 `;
 
-// 화면이 짧으면 포스터를 줄이지 않고 아래쪽부터 잘라냄 (잘린 끝도 흐려지며 이어짐)
 const PosterArea = styled.div`
   flex: 0 1 auto;
   min-height: 0;

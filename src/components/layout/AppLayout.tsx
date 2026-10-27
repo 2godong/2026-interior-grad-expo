@@ -37,7 +37,6 @@ export default function AppLayout() {
   );
 }
 
-// 히스토리 항목(location.key)별 스크롤 위치. 뒤로/앞으로 가기(POP)면 복원, 그 외엔 맨 위로.
 const scrollPositions = new Map<string, number>();
 
 function useScrollRestoration(scrollRef: RefObject<HTMLDivElement | null>) {
@@ -62,7 +61,6 @@ function useScrollRestoration(scrollRef: RefObject<HTMLDivElement | null>) {
     el.scrollTo(0, target);
     if (el.scrollTop >= target) return;
 
-    // 이미지 로딩 등으로 콘텐츠 높이가 늘어나면 목표 위치까지 다시 시도
     const content = el.firstElementChild;
     if (!content) return;
     const observer = new ResizeObserver(() => {

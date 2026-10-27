@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { AudioContainer } from "@/components/List/Audio.styles";
 import { paths } from "@/paths";
 
-// 도면에서 재생 중인 도슨트가 없을 때 오디오바 자리에 보이는 전시 정보 칸
 export default function ExhibitionPanel() {
   return (
     <Panel>
@@ -17,7 +16,6 @@ export default function ExhibitionPanel() {
   );
 }
 
-// 제목은 한 줄 전체, 아래 왼쪽에 부제·기간, 오른쪽 아래에 전시 정보 버튼
 const Panel = styled(AudioContainer)`
   display: grid;
   grid-template-columns: 1fr auto;
