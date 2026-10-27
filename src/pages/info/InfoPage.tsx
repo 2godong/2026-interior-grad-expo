@@ -58,7 +58,7 @@ export default function InfoPage() {
           <S.Label>운영시간</S.Label>
           <S.Value>
             <S.Hours>
-              <span>10/30</span>
+              <span>10/30~11/03</span>
               <span>10:00 — 18:00</span>
               <span>11/04</span>
               <span>10:00 — 14:00</span>
