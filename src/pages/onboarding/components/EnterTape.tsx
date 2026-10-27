@@ -18,7 +18,8 @@ type Props = {
 };
 
 export default function EnterTape({ mode, peeling }: Props) {
-  const { width, height, offsetX, offsetBottom, shiftY, tapes, label } = tapeSets[mode];
+  const { width, height, offsetX, offsetBottom, shiftY, tapes, label } =
+    tapeSets[mode];
 
   const stuckRefs = useRef<(HTMLDivElement | null)[]>([]);
   const flapRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -28,13 +29,11 @@ export default function EnterTape({ mode, peeling }: Props) {
   const labelTextRef = useRef<HTMLSpanElement>(null);
   const [labelScale, setLabelScale] = useState(1);
 
-  // 인앱 브라우저 글자 크기 설정 등으로 라벨만 커지면 테이프 밖으로 넘치므로, 실제 폭을 재서 줄인다
   useLayoutEffect(() => {
     const fit = () => {
       const group = groupRef.current;
       const text = labelTextRef.current;
       if (!group || !text || !group.offsetWidth) return;
-      // zoom 영향을 피하려고 Group 폭(= width) 대비 비율로 환산
       const textWidth = (text.offsetWidth / group.offsetWidth) * width;
       setLabelScale(Math.min(1, label.maxWidth / textWidth));
     };
@@ -130,7 +129,9 @@ export default function EnterTape({ mode, peeling }: Props) {
         </Layer>
       ))}
       <Layer ref={labelRef}>
-        <Label ref={labelTextRef} style={labelStyle}>화면을 탭하면 바로 입장합니다 →</Label>
+        <Label ref={labelTextRef} style={labelStyle}>
+          화면을 탭하면 바로 입장합니다 →
+        </Label>
       </Layer>
       {tapes.map((tape, i) => (
         <Flap key={i} ref={(el) => void (flapRefs.current[i] = el)}>

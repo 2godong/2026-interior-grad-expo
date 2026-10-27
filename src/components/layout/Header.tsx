@@ -5,8 +5,6 @@ import { paths } from "@/paths";
 import { layout } from "@/styles/media";
 
 const GALLERY = "Space Sophora Gallery B1";
-
-// 처음 한 번만 전시 정보 버튼 위치를 알려주는 말풍선
 const INFO_HINT_KEY = "infoHintSeen";
 const INFO_HINT_DURATION = 3000;
 
@@ -24,7 +22,7 @@ function useInfoHint() {
     try {
       localStorage.setItem(INFO_HINT_KEY, "1");
     } catch {
-      // 저장이 막혀 있으면 다음 방문에도 다시 보인다
+      // 저장이 막혀 있으면 다음 방문에도 다시 보임
     }
     const timer = setTimeout(() => setShow(false), INFO_HINT_DURATION);
     return () => clearTimeout(timer);
@@ -33,7 +31,6 @@ function useInfoHint() {
   return [show, () => setShow(false)] as const;
 }
 
-// 헤더1: 도면·리스트 페이지. 장소 옆에 전시 정보 버튼, 오른쪽에 도면/리스트 전환 탭
 export function TabHeader({ title }: { title: string }) {
   const [showHint, hideHint] = useInfoHint();
 
@@ -85,7 +82,6 @@ type BackHeaderProps = {
   fallback?: string;
 };
 
-// 헤더2: 상세보기·전시 정보 페이지. 왼쪽 뒤로가기, 오른쪽 정렬 제목
 export function BackHeader({
   title,
   subtitle = GALLERY,
@@ -185,6 +181,11 @@ const InfoLink = styled(Link)`
   margin: -6px;
   padding: 6px 6px 6px 10px;
   color: inherit;
+  -webkit-tap-highlight-color: transparent;
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
 `;
 
 const bubbleIn = keyframes`
