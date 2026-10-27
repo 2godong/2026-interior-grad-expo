@@ -10,6 +10,8 @@ export interface ListContainerProps {
   duration: string;
   /** 오디오바에 올라와 있는(재생 중인) 작품 */
   active?: boolean;
+  /** 항목을 눌렀을 때 (상세로 이동하기 직전) */
+  onSelect?: () => void;
 }
 
 export default function ListContainer({
@@ -19,12 +21,14 @@ export default function ListContainer({
   zone,
   duration,
   active = false,
+  onSelect,
 }: ListContainerProps) {
   return (
     <S.ListContainer
       as={Link}
       to={`/docent/${teamId}/${zone}`}
       $active={active}
+      onClick={onSelect}
     >
       <S.NumberContainer>
         <S.NumBox $zone={zone} $active={active}>
